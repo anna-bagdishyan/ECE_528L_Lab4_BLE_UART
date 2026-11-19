@@ -200,3 +200,51 @@ void BLE_UART_Reset()
     // Switch back to DATA mode by clearing the MOD pin (P1.6) to 0
     P1->OUT &= ~0x40;
 }
+
+int BLE_UART_InPacket(char *buffer_pointer, uint16_t buffer_size)
+{
+    int length = 0;
+    int string_size = 0;
+
+    // buffer holds 5 bytes and terminator
+    if (buffer_size < 6)
+        {
+            return 0;
+        }
+
+    // Read the last received data from the UART Receive Buffer
+    char character = BLE_UART_InChar();
+
+    // Check if the received character is a carriage return. Otherwise,
+    // if it is a valid character, then store it in BLE_UART_Buffer in main.
+    // For each valid character, increment the string_size variable which will
+    // indicate how many characters have been detected from the BLE UART module
+
+
+    // wait until header character '!' is received
+    while(character != '!')
+    {
+        character = BLE_UART_InChar();
+    }
+
+    // read and store the 5-byte packet
+    while(length < 5)
+    {
+        if(length < buffer_size - 1)
+        {
+            *buffer_pointer = character;
+            buffer_pointer++;
+            length++;
+            string_size++;
+        }
+
+        if(length < 5)
+        {
+            character = BLE_UART_InChar();
+        }
+    }
+
+    *buffer_pointer = 0;
+
+    return string_size;
+}

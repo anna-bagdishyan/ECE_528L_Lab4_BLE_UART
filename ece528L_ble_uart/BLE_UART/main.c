@@ -46,6 +46,122 @@ void Process_BLE_UART_Data(char BLE_UART_Buffer[])
     }
 }
 
+// Task 6.1 part a
+void UART_Transmit_Fixed()
+{
+    BLE_UART_OutChar(0xAA);
+    Clock_Delay1ms(100);
+
+    BLE_UART_OutChar(0x55);
+    Clock_Delay1ms(100);
+
+    BLE_UART_OutChar(0xFF);
+    Clock_Delay1ms(100);
+
+    BLE_UART_OutChar(0x00);
+    Clock_Delay1ms(100);
+}
+
+// Task 6.1 part b
+void UART_Transmit_Switch(uint8_t switch_status)
+{
+    switch(switch_status)
+    {
+        case 0x01:
+        {
+            BLE_UART_OutChar(0xAA);
+            Clock_Delay1ms(100);
+        }
+        break;
+
+        case 0x02:
+        {
+            BLE_UART_OutChar(0x10);
+            Clock_Delay1ms(100);
+        }
+        break;
+
+        case 0x04:
+        {
+            BLE_UART_OutChar(0xF0);
+            Clock_Delay1ms(100);
+        }
+        break;
+        case 0x08:
+        {
+            BLE_UART_OutChar(0x0F);
+            Clock_Delay1ms(100);
+        }
+        break;
+        default:
+        {
+            BLE_UART_OutChar(0x00);
+            Clock_Delay1ms(100);
+        }
+        break;
+    }
+}
+
+// Task 6.2
+void Decode_Controller_Packet(char BLE_UART_Buffer[])
+{
+    // must be true: byte 0 !, byte 1 = B
+    if (BLE_UART_Buffer[0] != '!' || BLE_UART_Buffer[1] != 'B')
+    {
+        return;
+    }
+
+    // read byte 2 (button pressed) and byte 3 (button state)
+    char button = BLE_UART_Buffer[2];
+    char state = BLE_UART_Buffer[3];
+    printf("Button: %c, State: %c\n", button, state);
+
+    // button pressed must be between 5 and 8 for the arrows
+    if (button < '5' || button > '8')
+    {
+        return;
+    }
+
+    // stop both motors when a button is released
+    if (state == '0')
+    {
+        Motor_Stop();
+    }
+    else if (state == '1')
+    {
+        switch(button)
+        {
+            case '5': // up
+            {
+                printf("Moving forward\n");
+                Motor_Forward(PWM_NOMINAL, PWM_NOMINAL);
+            }
+            break;
+
+            case '6': // down
+            {
+                printf("Moving backward\n");
+                Motor_Backward(PWM_NOMINAL, PWM_NOMINAL);
+            }
+            break;
+
+            case '7': // left
+            {
+                printf("Moving left\n");
+                Motor_Left(PWM_NOMINAL, PWM_NOMINAL);
+            }
+            break;
+
+            case '8': // right
+            {
+                printf("Moving right\n");
+                Motor_Right(PWM_NOMINAL, PWM_NOMINAL);
+            }
+            break;
+        }
+    }
+}
+
 int main(void)
 {
     // Ensure that interrupts are disabled during initialization
@@ -66,6 +182,9 @@ int main(void)
     // Initialize the DC motors
     Motor_Init();
 
+    // Initialize the PMOD SWT module
+    PMOD_SWT_Init();
+
     // Initialize a buffer that will be used to receive command string from the BLE module
     char BLE_UART_Buffer[BLE_UART_BUFFER_SIZE] = {0};
 
@@ -79,20 +198,39 @@ int main(void)
     // Send a message to the BLE module to check if the connection is stable
     BLE_UART_OutString("BLE UART Active\r\n");
     Clock_Delay1ms(1000);
-
+    printf("BLE Ready\n");
     while(1)
     {
-        int string_size = BLE_UART_InString(BLE_UART_Buffer, BLE_UART_BUFFER_SIZE);
+//        int string_size = BLE_UART_InString(BLE_UART_Buffer, BLE_UART_BUFFER_SIZE);
+//
+//        printf("BLE UART Data: ");
+//
+//        for (int i = 0; i < string_size; i++)
+//        {
+//            printf("%c", BLE_UART_Buffer[i]);
+//        }
+//
+//        printf("\n");
+//
+//        Process_BLE_UART_Data(BLE_UART_Buffer);
 
-        printf("BLE UART Data: ");
+//        UART_Transmit_Fixed(); // Task 6A
 
-        for (int i = 0; i < string_size; i++)
-        {
-            printf("%c", BLE_UART_Buffer[i]);
-        }
+//        uint8_t switch_status = Get_PMOD_SWT_Status(); // Task 6B
+//        UART_Transmit_Switch(switch_status);
 
-        printf("\n");
 
-        Process_BLE_UART_Data(BLE_UART_Buffer);
+            printf("Waiting for BLE packet...\n");
+
+            int packet_size = BLE_UART_InPacket(BLE_UART_Buffer,
+                                               BLE_UART_BUFFER_SIZE);
+
+            printf("Packet Received! Size: %d\n", packet_size);
+
+            if (packet_size == 5)
+            {
+                Decode_Controller_Packet(BLE_UART_Buffer);
+            }
+
     }
 }
