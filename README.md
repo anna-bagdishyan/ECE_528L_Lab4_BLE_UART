@@ -35,6 +35,7 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
     | P2.3   | PM_UCA1TXD/PM_UCA1SIMO | eUSCI_A1 UART TXD (direction controlled by eUSCI – output)/eUSCI_A1 SPI slave in master out (direction controlled by eUSCI) | N/A
     | P3.2   | PM_UCA2RXD/PM_UCA2SOM | eUSCI_A2 UART RXD (direction controlled by eUSCI – input)/eUSCI_A2 SPI slave out master in (direction controlled by eUSCI) | N/A
     | P3.3 | PM_UCA2TXD/PM_UCA2SIMO | eUSCI_A2 UART TXD (direction controlled by eUSCI – output)/eUSCI_A2 SPI slave in master out (direction controlled by eUSCI) | N/A
+6. The UCMSB bit (Bit 13) in the UCAxCTLW0 register sets the bit order. When UCMSB is 0, data is sent LSB first, and when it is 1, data is sent MSB first.
 8. ```c
     void P2_2_and_P2_3_Init(void)
     {
