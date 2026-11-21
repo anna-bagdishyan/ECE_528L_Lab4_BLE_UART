@@ -37,7 +37,7 @@ An oscilloscope probe was connected to the UART TX pin (P9.7) and GND. A screens
 ![ff](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_FF.JPG)
 ![00](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_00.JPG)
 
-Figure 1 - Oscilloscope photos for Task A1 and A2 (0xAA, 0x55, 0xFF, 0x00)
+Figure 1 - Oscilloscope photos for Task A1 and A2 (`0xAA`, `0x55`, `0xFF`, `0x00`)
 
 ### Task B
 The BLE_UART_InPacket function receives a 5 byte packet from the BLE module by waiting until the ! header is detected. The header and the next four bytes are then stored in the buffer. The Decode_Controller_Packet function checks for the !B header and reads the button number and state. Buttons 5, 6, 7, and 8 correspond to forward, back, left, and right. When a button is released, the motors stop. When a button is pressed, the corresponding motor function is called.
