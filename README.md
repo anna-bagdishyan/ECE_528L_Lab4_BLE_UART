@@ -27,13 +27,20 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
 1. BLE is a light-weight subset of classic Bluetooth that was introduced as part of the Bluetooth 4.0 core specification. It uses much less power than classic Bluetooth so devices can run on small batteries, but it has a shorter range and a lower data transfer rate.
 2. GAP stands for Generic Access Profile, and it controls connections and advertising in Bluetooth. A Central is a more powerful device, like a phone, that scans for and connects to Peripherals.
 3. GATT (Generic Attribute Profile) sets the rules for how two connected BLE devices send data to each other. A Profile is a set of Services, a Service is a set of Characteristics, and a Characteristic is one piece of data.
-
+8. ```c
+    void P2_2_and_P2_3_Init(void)
+    {
+       P1->SEL0 |= ~0x0C;
+       P1->SEL1 &= ~0x0C;
+    } 
+    ```
 ## Analysis and Results  
 ### Tasks A1 and A2  
 
 In this task, a program had to be written to send four bytes over UART using the `BLE_UART_OutChar` function: `0xAA`, `0x55`, `0xFF` and `0x00`. A short delay had to be added between each byte so the oscilloscope could capture each one.
 
 An oscilloscope probe was connected to the UART TX pin (P9.7) and GND. A screenshot had to be taken for each byte. On each screenshot, the start bit, data bits (D0 to D7), stop bit and bit period had to be labeled. The bit period had to be measured, and the bit order had to be checked to make sure it was correct.
+
 ![aa](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_aa.JPG)
 ![55](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_55.JPG)
 ![ff](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_FF.JPG)
