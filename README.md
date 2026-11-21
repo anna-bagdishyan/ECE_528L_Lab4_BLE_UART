@@ -12,6 +12,7 @@ The Bluetooth Low Energy (BLE) lab interfaces with the following:
 
 ## Overview
 This lab used the UART protocol to send and receive data with the MSP432 LaunchPad. The EUSCI_A3 module was set up in UART mode, and a driver was written for the Adafruit Bluefruit LE UART module. This driver let the LaunchPad talk to a phone over Bluetooth Low Energy (BLE) through the Bluefruit Connect app. First, the driver was used to turn the RGB LED on and off with text commands sent from the phone. Next, an oscilloscope was used to look at the UART signal and check the start bit, data bits, stop bit and bit period. The PMOD SWT switches were also used to pick which byte to send. Finally, the button packets from the app's Control Pad were read and used to drive the robot forward, backward, left and right.
+
 ## Components Used
 | Components Used | Quantity    | Manufacturer 
 | -------------   | ----------- | -----------
@@ -27,6 +28,10 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
 
 ## Analysis and Results  
 ### Tasks A1 and A2  
+
+In this task, a program had to be written to send four bytes over UART using the `BLE_UART_OutChar` function: `0xAA`, `0x55`, `0xFF` and `0x00`. A short delay had to be added between each byte so the oscilloscope could capture each one.
+
+An oscilloscope probe was connected to the UART TX pin (P9.7) and GND. A screenshot had to be taken for each byte. On each screenshot, the start bit, data bits (D0 to D7), stop bit and bit period had to be labeled. The bit period had to be measured, and the bit order had to be checked to make sure it was correct.
 ![aa](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_aa.JPG)
 ![55](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_55.JPG)
 ![ff](https://github.com/anna-bagdishyan/ECE_528L_Lab4_BLE_UART/blob/main/Screenshots/parta_FF.JPG)
