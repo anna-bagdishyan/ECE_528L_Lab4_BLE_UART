@@ -24,7 +24,7 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
 | Oscilloscope Probe | 1 | N/A
 
 ## Prelab
-1.s
+1. BLE is a light-weight subset of classic Bluetooth that was introduced as part of the Bluetooth 4.0 core specification. It uses much less power than classic Bluetooth so devices can run on small batteries, but it has a shorter range and a lower data transfer rate.
 2. GAP stands for Generic Access Profile, and it controls connections and advertising in Bluetooth. A Central is a more powerful device, like a phone, that scans for and connects to Peripherals.
 
 ## Analysis and Results  
