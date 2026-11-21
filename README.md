@@ -28,6 +28,13 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
 2. GAP stands for Generic Access Profile, and it controls connections and advertising in Bluetooth. A Central is a more powerful device, like a phone, that scans for and connects to Peripherals.
 3. GATT (Generic Attribute Profile) sets the rules for how two connected BLE devices send data to each other. A Profile is a set of Services, a Service is a set of Characteristics, and a Characteristic is one piece of data.
 4. An advertising packet is a small message a BLE device sends out to let nearby devices know it is there. It can contain the device name, the services it offers and a small amount of custom data.
+5.
+    | Pin | Mnemonic  | Input Pin Primary Function | Output Pin Primary Function 
+    | -------------   | ----------- | ----------- | -----------
+    | P2.2 | PM_UCA1RXD/PM_UCA1SOM | eUSCI_A1 UART RXD (direction controlled by eUSCI – Input) eUSCI_A1 SPI slave out master in (direction controlled by eUSCI) | N/A
+    | P2.3   | PM_UCA1TXD/PM_UCA1SIMO | eUSCI_A1 UART TXD (direction controlled by eUSCI – output)/eUSCI_A1 SPI slave in master out (direction controlled by eUSCI) | N/A
+    | P3.2   | PM_UCA2RXD/PM_UCA2SOM | eUSCI_A2 UART RXD (direction controlled by eUSCI – input)/eUSCI_A2 SPI slave out master in (direction controlled by eUSCI) | N/A
+    | P3.3 | PM_UCA2TXD/PM_UCA2SIMO | eUSCI_A2 UART TXD (direction controlled by eUSCI – output)/eUSCI_A2 SPI slave in master out (direction controlled by eUSCI) | N/A
 8. ```c
     void P2_2_and_P2_3_Init(void)
     {
