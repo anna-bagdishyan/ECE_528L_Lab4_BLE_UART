@@ -24,7 +24,8 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
 | Oscilloscope Probe | 1 | N/A
 
 ## Prelab
-1. 
+1.s
+2. GAP stands for Generic Access Profile, and it controls connections and advertising in Bluetooth. A Central is a more powerful device, like a phone, that scans for and connects to Peripherals.
 
 ## Analysis and Results  
 ### Tasks A1 and A2  
