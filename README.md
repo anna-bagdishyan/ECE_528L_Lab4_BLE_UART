@@ -28,7 +28,7 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
 2. GAP stands for Generic Access Profile, and it controls connections and advertising in Bluetooth. A Central is a more powerful device, like a phone, that scans for and connects to Peripherals.
 3. GATT (Generic Attribute Profile) sets the rules for how two connected BLE devices send data to each other. A Profile is a set of Services, a Service is a set of Characteristics, and a Characteristic is one piece of data.
 4. An advertising packet is a small message a BLE device sends out to let nearby devices know it is there. It can contain the device name, the services it offers and a small amount of custom data.
-5. In BLE a UUID is used for communication between devices in Bluetooth communication. 128 bits are used to ensure that the likelihood of a duplicate UUID is minimal.
+5. In BLE, a UUID is used for communication between devices in Bluetooth communication. 128 bits are used to ensure that the likelihood of a duplicate UUID is minimal.
 6. 
     | Pin | Mnemonic  | Input Pin Primary Function | Output Pin Primary Function 
     | -------------   | ----------- | ----------- | -----------
