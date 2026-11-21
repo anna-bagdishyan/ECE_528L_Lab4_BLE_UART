@@ -64,12 +64,13 @@ The BLE_UART_InPacket function receives a 5 byte packet from the BLE module by w
 ## Known Issues or Limitations  
 There are no known current issues or limitations.  
 
-## Author Contribution  
 Anna  
 - Wrote Task B
+- Prelab
 
 Mario  
-- 
+- Prelab
+- Task A
   
 ## References
 ECE 528/L Lab 4 - Wireless Control.
