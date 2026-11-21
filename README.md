@@ -26,6 +26,7 @@ This lab used the UART protocol to send and receive data with the MSP432 LaunchP
 ## Prelab
 1. BLE is a light-weight subset of classic Bluetooth that was introduced as part of the Bluetooth 4.0 core specification. It uses much less power than classic Bluetooth so devices can run on small batteries, but it has a shorter range and a lower data transfer rate.
 2. GAP stands for Generic Access Profile, and it controls connections and advertising in Bluetooth. A Central is a more powerful device, like a phone, that scans for and connects to Peripherals.
+3. GATT (Generic Attribute Profile) sets the rules for how two connected BLE devices send data to each other. A Profile is a set of Services, a Service is a set of Characteristics, and a Characteristic is one piece of data.
 
 ## Analysis and Results  
 ### Tasks A1 and A2  
